@@ -16,7 +16,7 @@ const firebaseConfig = {
   storageBucket: "zardalapp.firebasestorage.app",
   messagingSenderId: "211223110168",
   appId: "1:211223110168:web:d659d57163c04c31f8d96d",
-  measurementId: "G-7LZC58JP1H"
+  measurementId: "G-7LZC58JP1H" dfgdfg
 };
 
 // Initialize Firebase
@@ -30,4 +30,4 @@ export const auth = initializeAuth(app, {
 
 
 // db
-export const firestore = getFirestore(app); 1213
+export const firestore = getFirestore(app); 
