@@ -1,10 +1,10 @@
-import { StyleSheet, Text, TextStyle, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TextStyle, TouchableOpacity, View } from 'react-native'; 55555
 import React from 'react';
 import {colors, radius} from "@/constants/theme";
 import {BackButtonProps, TypoProps} from "@/types";
 import { verticalScale } from '@/utils/styling';
 import {useRouter} from "expo-router";
-import { CaretLeft } from "phosphor-react-native"; 1123
+import { CaretLeft } from "phosphor-react-native"; 
 
 
 
