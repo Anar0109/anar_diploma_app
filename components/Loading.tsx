@@ -3,7 +3,7 @@ import React from 'react';
 import { CustomButtonProps } from "@/types";
 import {colors, radius} from '@/constants/theme';
 import {verticalScale} from '@/utils/styling';
-import { CpuIcon } from "phosphor-react-native";
+import { CpuIcon } from "phosphor-react-native"; 5995
 
 
 
