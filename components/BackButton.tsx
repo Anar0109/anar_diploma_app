@@ -4,7 +4,7 @@ import {colors, radius} from "@/constants/theme";
 import {BackButtonProps, TypoProps} from "@/types";
 import { verticalScale } from '@/utils/styling';
 import {useRouter} from "expo-router";
-import { CaretLeft } from "phosphor-react-native";
+import { CaretLeft } from "phosphor-react-native"; 1123
 
 
 
