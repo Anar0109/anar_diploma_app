@@ -48,13 +48,13 @@ import { Image, StyleSheet, Text, View } from "react-native";
 import { colors } from "@/constants/theme";
 import { StatusBar } from "expo-status-bar";
 
-const SplashScreen = () => {
+const index = () => {
   const router = useRouter();
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     router.replace("/welcome");
-  //   }, 1500);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      router.replace("/welcome");
+    }, 1500);
+  }, []);
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
   // },
 });
 
-export default SplashScreen;
+export default index;

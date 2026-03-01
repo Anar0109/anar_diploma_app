@@ -6,6 +6,9 @@ const _layout = () => {
   return <Tabs></Tabs>
 };
 
-export default _layout;
+// export default _layout;
+export default function TabLayout() {
+  return <Tabs />;
+}
 
 const styles = StyleSheet.create({});

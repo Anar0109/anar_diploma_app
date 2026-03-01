@@ -105,15 +105,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      // console.log("got user in auth state changed: ", firebaseUser);
+      
+      console.log("firebaseUser", firebaseUser);
       if (firebaseUser) {
         setUser({
           uid: firebaseUser.uid,
           email: firebaseUser.email,
           name: firebaseUser?.displayName,
         });
-        // updateUserData(firebaseUser.uid);
-        router.replace("/");
+       
+        router.replace("/(tabs)"); //("/")
       } else {
         setUser(null);
         router.replace("/(auth)/welcome");
@@ -129,6 +130,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       return { success: true };
     } catch (error: any) {
       let msg = error.message;
+      console.log("error message: ", msg);
       if (msg.includes("(auth/invalid-email)")) msg = "Invalid email";
       if (msg.includes("(auth/invalid-credential)")) msg = "Wrong credentials";
       return { success: false, msg };
@@ -150,7 +152,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       return { success: true };
     } catch (error: any) {
       let msg = error.message;
-
+      console.log("error message: ", msg);
       if (msg.includes("(auth/invalid-email)")) msg = "Invalid email";
       if (msg.includes("(auth/email-already-in-use)"))
         msg = "This email is already in use";
@@ -162,7 +164,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const updateUserData = async (uid: string) => {
     try {
       const docRef = doc(firestore, "users", uid);
-      // console.log("updating data for : ", uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -173,7 +174,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           name: data.name || null,
           image: data.image || null,
         };
-        // console.log("updated user data: ", userData);
         setUser({ ...user, ...userData });
       }
     } catch (error) {
