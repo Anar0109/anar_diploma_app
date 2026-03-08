@@ -2,15 +2,27 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Button from "@/components/Button";
 import Typo from "@/components/Typo";
+import { colors } from "@/constants/theme";
+import { signOut } from "firebase/auth";
+import { auth } from "@/config/firebase";
+import {useAuth} from "@/contexts/AuthContext"; 
+import Screenwrapper from "@/components/ScreenWrapper";
 
 const Home = () => {
+
+  const {user} = useAuth();
+  console.log("user: ", user);
+  const handleLogout = async() => {
+    await signOut(auth);
+  }
+
   return (
-    <View>
-      <Text>Home</Text>
-      <Button>
-        <Typo>Logout</Typo> 
+    <Screenwrapper>
+      <Typo>Home</Typo> 
+      <Button onPress={handleLogout}>
+        <Typo color={colors.black}>Logout</Typo> 
       </Button>
-    </View>
+    </Screenwrapper>
   );
 };
 
