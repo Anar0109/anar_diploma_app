@@ -6,22 +6,22 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { colors, spacingX, spacingY } from "@/constants/theme";
 import ModalWrapper from "@/components/ModalWrapper";
 import Header from "@/components/Header";
 import Typo from "@/components/Typo";
-import Input from "@/components/Input";
+import Input from "@/components/input";      
 import { useAuth } from "@/contexts/authContext";
 import { UserDataType, UserType } from "@/types";
-import ImageUpload from "@/components/ImageUpload";
+import ImageUpload from "@/components/ImageUpload";  
 import Button from "@/components/Button";
 import { Image } from "expo-image";
 import { scale, verticalScale } from "@/utils/styling";
 import * as Icons from "phosphor-react-native";
 import * as ImagePicker from "expo-image-picker";
 import { getProfileImage } from "@/services/imageService";
-import { updateUser } from "@/services/userService";
+import { updateUser } from "@/services/userService"; 
 import { useRouter } from "expo-router";
 import BackButton from "@/components/BackButton";
 
@@ -108,7 +108,7 @@ const ProfileModal = () => {
           </View>
           <View style={styles.inputContainer}>
             <Typo color={colors.neutral200}>Name</Typo>
-            <Input
+            <Input 
               placeholder="Name"
               value={userData.name}
               onChangeText={(value) =>

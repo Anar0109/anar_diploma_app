@@ -5,7 +5,7 @@ import Typo from "@/components/Typo";
 import { colors } from "@/constants/theme";
 import { signOut } from "firebase/auth";
 import { auth } from "@/config/firebase";
-import {useAuth} from "@/contexts/AuthContext"; 
+import {useAuth} from "@/contexts/authContext";    
 import Screenwrapper from "@/components/ScreenWrapper";
 
 const Home = () => {
