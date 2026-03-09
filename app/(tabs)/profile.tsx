@@ -21,7 +21,7 @@ import { accountOptionType } from "@/types";
 import { signOut } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import { getProfileImage } from "@/services/imageService";
-import * as from "phosphor-react-native";
+
 
 const Profile = () => {
   const { user } = useAuth();
