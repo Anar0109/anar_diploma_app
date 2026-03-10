@@ -5,12 +5,11 @@ import Typo from "@/components/Typo"
 import { colors, spacingY, spacingX } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
 import BackButton from '@/components/BackButton'
-
 import * as Icons from 'phosphor-react-native';
 import Button from "@/components/Button";
 import { useRouter } from 'expo-router';
-import { useAuth } from '@/contexts/authContext';  
-import Input from '@/components/Input';    
+import { useAuth } from "@/contexts/authContext";    
+import Input from "@/components/Input";     
 
 const Register = () => {
 

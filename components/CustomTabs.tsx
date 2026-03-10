@@ -1,66 +1,62 @@
-import { View, Platform, StyleSheet,  } from 'react-native';
-import { useLinkBuilder, useTheme } from '@react-navigation/native';
-import { Text, PlatformPressable } from '@react-navigation/elements';
-import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { colors, spacingX, spacingY } from '@/constants/theme';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { verticalScale } from '@/utils/styling';
-import * as Icons from 'phosphor-react-native';
-import Statistics from '@/app/(tabs)/statistics';
-
-export default function CustomTabs({ state, descriptors, navigation }: BottomTabBarProps) {
- 
-  const tabbarIcon: any = {
-    index: (isFocused: boolean) => {
-      <Icons.HouseIcon
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+} from "react-native";
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
+import { scale, verticalScale } from "@/utils/styling";
+import * as Icons from "phosphor-react-native";
+import { colors, spacingY } from "@/constants/theme";
+function CustomTabs({ state, descriptors, navigation }: BottomTabBarProps) {
+  const tabbarIcons: any = {
+    index: (isFocused: boolean) => (
+      <Icons.House
         size={verticalScale(30)}
+        weight={isFocused ? "fill" : "regular"}
         color={isFocused ? colors.primary : colors.neutral400}
-        weight={isFocused ? 'fill' : 'regular'}
-        />
-    },
-
-     statistics: (isFocused: boolean) => {
-      <Icons.ChartBarIcon
+      />
+    ),
+    statistics: (isFocused: boolean) => (
+      <Icons.ChartBar
         size={verticalScale(30)}
+        weight={isFocused ? "fill" : "regular"}
         color={isFocused ? colors.primary : colors.neutral400}
-        weight={isFocused ? 'fill' : 'regular'}
-        />
-      },
-
-      wallet: (isFocused: boolean) => {
-      <Icons.WalletIcon
+      />
+    ),
+    wallet: (isFocused: boolean) => (
+      <Icons.Wallet
         size={verticalScale(30)}
+        weight={isFocused ? "fill" : "regular"}
         color={isFocused ? colors.primary : colors.neutral400}
-        weight={isFocused ? 'fill' : 'regular'
-        }
-        />
-    },
-
-    profile: (isFocused: boolean) => {
-      <Icons.UserIcon
+      />
+    ),
+    profile: (isFocused: boolean) => (
+      <Icons.User
         size={verticalScale(30)}
+        weight={isFocused ? "fill" : "regular"}
         color={isFocused ? colors.primary : colors.neutral400}
-        weight={isFocused ? 'fill' : 'regular'
-        }
-        />
-    },
-  }
+      />
+    ),
+  };
+
   return (
-    <View style={ styles.tabbar }>
+    <View style={styles.tabbar}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
-        const label: any =
+        const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
             : options.title !== undefined
-              ? options.title
-              : route.name;
+            ? options.title
+            : route.name;
 
         const isFocused = state.index === index;
 
         const onPress = () => {
           const event = navigation.emit({
-            type: 'tabPress',
+            type: "tabPress",
             target: route.key,
             canPreventDefault: true,
           });
@@ -72,27 +68,24 @@ export default function CustomTabs({ state, descriptors, navigation }: BottomTab
 
         const onLongPress = () => {
           navigation.emit({
-            type: 'tabLongPress',
+            type: "tabLongPress",
             target: route.key,
           });
         };
 
+        // console.log("route.name: ", route.name);
         return (
           <TouchableOpacity
-            // key={route.key}
-            // href={buildHref(route.name, route.params)}
-            key={route.name} 
+            key={route.name}
+            accessibilityRole="button"
             accessibilityState={isFocused ? { selected: true } : {}}
             accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={styles.tabbarItem }
+            style={styles.tabbarItem}
           >
-            {
-              tabbarIcon[route.name] && tabbarIcon[route.name](isFocused)
-            }
-          </TouchableOpacity>   
+            {tabbarIcons[route.name] && tabbarIcons[route.name](isFocused)}
+          </TouchableOpacity>
         );
       })}
     </View>
@@ -100,20 +93,29 @@ export default function CustomTabs({ state, descriptors, navigation }: BottomTab
 }
 
 const styles = StyleSheet.create({
-    tabbar: { 
-      flexDirection: 'row', 
-      width: "100%", 
-      height: Platform.OS === 'ios' ? verticalScale(73): verticalScale(55),
-      backgroundColor: colors.neutral800,
-      alignItems: "center",
-      justifyContent: "space-around",
-      borderTopColor: colors.neutral700,
-      borderTopWidth: 1
-    },
-    tabbarItem: {
-      marginBottom: Platform.OS === 'ios' ? spacingY._10: spacingY._5, 
-      alignItems: "center",
-      justifyContent: "center",
-      height: Platform.OS === 'ios' ? verticalScale(73): verticalScale(55),
-    }
+  tabbar: {
+    flexDirection: "row",
+    width: "100%",
+    height: verticalScale(73),
+    // paddingHorizontal: scale(10),
+    backgroundColor: colors.neutral800,
+    justifyContent: "space-around",
+    alignItems: "center",
+    // shadowColor: colors.white,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 20,
+    // },
+    // shadowOpacity: 0.5,
+    // shadowRadius: 20,
+    borderTopColor: colors.neutral700,
+    borderTopWidth: 1,
+  },
+  tabbarItem: {
+    marginBottom: Platform.OS == "ios" ? spacingY._10 : spacingY._5,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
+
+export default CustomTabs;

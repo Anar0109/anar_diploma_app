@@ -1,15 +1,26 @@
-import Screenwrapper from '@/components/ScreenWrapper'
-import React, { useRef, useState } from 'react'
-import { StyleSheet, View, Text, Pressable, Alert} from 'react-native'
-import Typo from "@/components/Typo"
-import { colors, spacingY, spacingX } from '@/constants/theme'
-import { verticalScale } from '@/utils/styling'
-import BackButton from '@/components/BackButton'
-import Input from '@/components/input'
-import * as Icons from 'phosphor-react-native';
+import {
+  Alert,
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
+import React, { useRef, useState } from "react";
+import ScreenWrapper from "../../components/ScreenWrapper";
+import { StatusBar } from "expo-status-bar";
+import { useRouter } from "expo-router";
+import BackButton from "@/components/BackButton";
+import Input from "@/components/Input";
 import Button from "@/components/Button";
-import { useRouter } from 'expo-router'; 
-import { useAuth } from '@/contexts/AuthContext'
+import { scale, verticalScale } from "@/utils/styling";
+import { colors, spacingX, spacingY } from "@/constants/theme";
+import Typo from "@/components/Typo";
+import * as Icons from "phosphor-react-native";
+import { useAuth } from "@/contexts/authContext";
+import Screenwrapper from "../../components/ScreenWrapper";
+
 
 const Login = () => {
 

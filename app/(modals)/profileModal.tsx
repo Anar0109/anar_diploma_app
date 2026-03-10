@@ -11,7 +11,7 @@ import { colors, spacingX, spacingY } from "@/constants/theme";
 import ModalWrapper from "@/components/ModalWrapper";
 import Header from "@/components/Header";
 import Typo from "@/components/Typo";
-import Input from "@/components/input";      
+import Input from "@/components/Input";      
 import { useAuth } from "@/contexts/authContext";
 import { UserDataType, UserType } from "@/types";
 import ImageUpload from "@/components/ImageUpload";  
