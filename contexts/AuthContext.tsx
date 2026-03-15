@@ -1,99 +1,13 @@
-// import { auth, firestore } from "@/config/firebase";
-// import { AuthContextType, UserType } from "@/types"
-// import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-// import { doc, getDoc, setDoc } from "firebase/firestore";
-// import { createContext, useContext, useState } from "react"
-
-// const authContext = createContext<AuthContextType | null> (null);
-
-// export const AuthProvider: React.FC<{children: React.ReactNode}> = ({
-//     children,
-// }) => {
-
-//     const [user, setUser] = useState<UserType>(null);
-    
-
-//     const login = async(email: string, password: string) => {
-//     try {
-//         await signInWithEmailAndPassword(auth, email, password);
-//         return {success: true}
-//     } catch (error: any) {
-//         let msg = error.message;
-//         return {success: false, msg}
-//     }
-// }
-
-//   const register = async(email: string, password: string, name: string,) => {
-//     try {
-//         let response = await createUserWithEmailAndPassword(auth, email, password);
-//         await setDoc(doc(firestore, "users", response?.user?.uid),{
-//             name,
-//             email,
-//             uid: response?.user?.uid,
-//         })
-//         return {success: true}
-//     } catch (error: any) {
-//         let msg = error.message;
-//         return {success: false, msg}
-//     }
-// }
-
-// const updateUserData = async(uid: string) => {
-//     try {
-//        const docRef = doc(firestore, "users", uid)
-//        const docSnap = await getDoc(docRef);
-
-//        if(docSnap.exists()){
-//         const data = docSnap.data();
-//         const userData: UserType = {
-//             uid: data?.uid,
-//             email: data.email || null,
-//             name: data.name || null,
-//             image: data.image || null,
-//         }
-//         setUser({...userData})
-//        }
-//     } catch (error: any) {
-//         let msg = error.message;
-//         // return {success: false, msg}
-//         console.log('error', error)
-//     }
-// }
-
-// const contextValue: AuthContextType = {
-//     user,
-//     setUser,
-//     login,
-//     register,
-//     updateUserData,
-// }
-
-//     return (
-//         <AuthContext.Provider value = {contextValue}>
-//             {children} 
-//         </AuthContext.Provider>
-//     )
-// }
-
-// export const useAuth = ():AuthContextType => {
-//     const context = useContext(AuthContext);
-//     if(!context){
-//         throw new Error("useAuth must be wrapped inside AuthProvider")
-//     }
-//     return context;
-// }
-
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { auth, firestore } from "@/config/firebase";
+import { AuthContextType, UserType } from "@/types";
+import { Router, useRouter } from "expo-router";
 import {
-  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
-  User as FirebaseUser,
+  signInWithEmailAndPassword
 } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { AuthContextType, UserType } from "@/types";
-import { auth, firestore } from "@/config/firebase";
-import { Router, useRouter, useSegments } from "expo-router";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -105,8 +19,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
-      
-      console.log("firebaseUser", firebaseUser);
+      // console.log("got user in auth state changed: ", firebaseUser);
       if (firebaseUser) {
         setUser({
           uid: firebaseUser.uid,
@@ -114,7 +27,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           name: firebaseUser?.displayName,
         });
         updateUserData(firebaseUser.uid);
-        router.replace("/(tabs)"); //("/")
+        router.replace("/(tabs)");
       } else {
         setUser(null);
         router.replace("/(auth)/welcome");
@@ -130,7 +43,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       return { success: true };
     } catch (error: any) {
       let msg = error.message;
-      console.log("error message: ", msg);
       if (msg.includes("(auth/invalid-email)")) msg = "Invalid email";
       if (msg.includes("(auth/invalid-credential)")) msg = "Wrong credentials";
       return { success: false, msg };
@@ -152,7 +64,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       return { success: true };
     } catch (error: any) {
       let msg = error.message;
-      console.log("error message: ", msg);
+
       if (msg.includes("(auth/invalid-email)")) msg = "Invalid email";
       if (msg.includes("(auth/email-already-in-use)"))
         msg = "This email is already in use";
@@ -164,6 +76,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const updateUserData = async (uid: string) => {
     try {
       const docRef = doc(firestore, "users", uid);
+      // console.log("updating data for : ", uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -174,6 +87,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           name: data.name || null,
           image: data.image || null,
         };
+        // console.log("updated user data: ", userData);
         setUser({ ...user, ...userData });
       }
     } catch (error) {

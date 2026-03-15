@@ -1,51 +1,51 @@
+// // Import the functions you need from the SDKs you need
+
+// import firestore from '@react-native-firebase/firestore';
+// import { getAnalytics } from "firebase/analytics";
 // import { initializeApp } from "firebase/app";
 
-// import { initializeAuth, getReactNativePersistence } from "firebase/auth";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-// import { auth } from "@/config/firebase";
-// import { signInWithEmailAndPassword } from "firebase/auth";
-// import { getFirestore, collection } from "firebase/firestore";
+// import { getAuth } from 'firebase/auth';
+// // TODO: Add SDKs for Firebase products that you want to use
+// // https://firebase.google.com/docs/web/setup#available-libraries
 
-// // 1. create new project on firebase console
-// // 2. create a web app and copy the firebseConfigs below
+// // Your web app's Firebase configuration
+// // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // const firebaseConfig = {
-//   apiKey: "AIzaSyBGQFsx67DsdEaThzvjy8jh-qWexCCoN_8",
-//   authDomain: "expense-tracker-test-64054.firebaseapp.com",
-//   projectId: "expense-tracker-test-64054",
-//   storageBucket: "expense-tracker-test-64054.appspot.com",
-//   messagingSenderId: "451101639624",
-//   appId: "1:451101639624:web:a441be84a3db583b0f76fd",
+//   apiKey: "AIzaSyCPf6dqDxKdpZyNjRdudxpAGdhG_8daM8E",
+//   authDomain: "zardalapp-e5693.firebaseapp.com",
+//   projectId: "zardalapp-e5693",
+//   storageBucket: "zardalapp-e5693.firebasestorage.app",
+//   messagingSenderId: "122536963307",
+//   appId: "1:122536963307:web:7e063c7765e9229a3de2ae",
+//   measurementId: "G-ENYF306FBE"
 // };
 
 // // Initialize Firebase
 // const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
 
-// export const auth = initializeAuth(app, {
-//   persistence: getReactNativePersistence(AsyncStorage),
-// });
-// // export const auth = initializeAuth(app);
+// export const auth = getAuth(app);
 
-// export const firestore = getFirestore(app);
+// export { firestore };
+
 
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// Firebase config
 const firebaseConfig = {
-  apiKey: "AIzaSyBGQFsx67DsdEaThzvjy8jh-qWexCCoN_8",
-  authDomain: "expense-tracker-test-64054.firebaseapp.com",
-  projectId: "expense-tracker-test-64054",
-  storageBucket: "expense-tracker-test-64054.appspot.com",
-  messagingSenderId: "451101639624",
-  appId: "1:451101639624:web:a441be84a3db583b0f76fd",
+  apiKey: "AIzaSyCPf6dqDxKdpZyNjRdudxpAGdhG_8daM8E",
+  authDomain: "zardalapp-e5693.firebaseapp.com",
+  projectId: "zardalapp-e5693",
+  storageBucket: "zardalapp-e5693.firebasestorage.app",
+  messagingSenderId: "122536963307",
+  appId: "1:122536963307:web:7e063c7765e9229a3de2ae",
+  measurementId: "G-ENYF306FBE"
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// ✅ Expo Go-д зөв auth
 export const auth = getAuth(app);
-
-// ✅ Firestore
 export const firestore = getFirestore(app);
+
+

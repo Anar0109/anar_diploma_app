@@ -73,7 +73,7 @@ function CustomTabs({ state, descriptors, navigation }: BottomTabBarProps) {
           });
         };
 
-        // console.log("route.name: ", route.name);
+      
         return (
           <TouchableOpacity
             key={route.name}
